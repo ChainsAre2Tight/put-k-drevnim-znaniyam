@@ -59,7 +59,7 @@ function transform_code(code, transforms, reverse) {
     else if (reverse === true) {
         transforms.sort(anti_compare)
     }
-    console.log(transforms)
+    // console.log(transforms)
 
     for (const line of code.split('\n')) {
         if (line.includes("#include") || line === '') {
@@ -97,6 +97,11 @@ function main(r) {
     const code = get_textarea_content('code-input');
 //     transform it
     let result = transform_code(code, definesArray, reverse = r)
+// decode defines
+    const new_defines = transform_code(defines, definesArray, reverse = true)
+    const new_definesArray = get_list_of_defines(new_defines)
+// transform result once again
+    result = transform_code(result, new_definesArray, reverse = r)
 //     print it
     print_result('code-output', result)
 
