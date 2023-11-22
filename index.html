@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Переводчик на древний язык</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
@@ -26,9 +26,17 @@
         </div>
     </div>
 
-    <div class="container-xs">
-        <div class="label">
-            <button type='button' onclick="main()" class="btn btn-primary">Восстановить знания</button>
+    <div class="container d-inline-flex">
+        <div class="container-xs">
+            <div class="label">
+                <button type='button' onclick="main(r=false)" class="btn btn-primary">Восстановить знания</button>
+            </div>
+        </div>
+
+        <div class="container-xs">
+            <div class="label">
+                <button type='button' onclick="main(r=true)" class="btn btn-primary">Утерять знания</button>
+            </div>
         </div>
     </div>
 
@@ -37,7 +45,7 @@
             <a>Вывод<br></a>
             <br>
         </div>
-        <a id="code-output"></a>
+        <pre id="code-output"></pre>
 
     </div>
 </div>

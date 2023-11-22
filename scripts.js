@@ -8,6 +8,9 @@ function get_textarea_content(id) {
 function compare(a, b) {
     return -(a[1].length - b[1].length)
 }
+function anti_compare(a, b) {
+    return -(a[0].length - b[0].length)
+}
 
 function get_list_of_defines(text) {
     let lines = text.split('\n')
@@ -34,20 +37,31 @@ function get_list_of_defines(text) {
             continue;
         }
     }
-    result.sort(compare)
-    console.log(result)
+
 
 
     return result
 }
 
-function transform_code(code, transforms) {
+function transform_code(code, transforms, reverse) {
     let result = Array()
+
+    if (reverse === false) {
+        transforms.sort(compare)
+    }
+    else if (reverse === true) {
+        transforms.sort(anti_compare)
+    }
+    console.log(transforms)
 
     for (const line of code.split('\n')) {
         let new_line = line;
         for (const rep of transforms) {
-            new_line = new_line.replaceAll(rep[1], rep[0])
+            if (reverse === false) {
+                new_line = new_line.replaceAll(rep[1], rep[0])
+            } else if (reverse === true) {
+                new_line = new_line.replaceAll(rep[0], rep[1])
+            }
 
 
             // console.log(rep)
@@ -65,14 +79,14 @@ function print_result(id, code) {
 }
 
 
-function main() {
+function main(r) {
 //     get contents of define area
     const defines = get_textarea_content('define-input');
     const definesArray = get_list_of_defines(defines)
 //     get contents of code area
     const code = get_textarea_content('code-input');
 //     transform it
-    let result = transform_code(code, definesArray)
+    let result = transform_code(code, definesArray, reverse = r)
 //     print it
     print_result('code-output', result)
 
