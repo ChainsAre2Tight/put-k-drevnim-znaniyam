@@ -12,6 +12,13 @@ function anti_compare(a, b) {
     return -(a[0].length - b[0].length)
 }
 
+var blacklist = [
+    ">>", ">", ";", ">=", "<", "(", ")", "()",
+    "<<", "<=", '=', '==', "&", "?", "^",
+    "0", "1", "2", "3", "4",
+    "5", "6", "7", "8", "9",
+]
+
 function get_list_of_defines(text) {
     let lines = text.split('\n')
 
@@ -29,7 +36,7 @@ function get_list_of_defines(text) {
             let transformation = line.slice(first + 1, last)
             let prototype = line.slice(last + 1, line.length)
 
-            if (prefix === '#define') {
+            if (prefix === '#define' && !blacklist.includes(prototype)) {
                 result.push([transformation, prototype])
                 // console.log(transformation, prototype)
             }
