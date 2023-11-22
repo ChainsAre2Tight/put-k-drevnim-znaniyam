@@ -82,7 +82,7 @@ function transform_code(code, transforms, reverse) {
 
 function print_result(id, code) {
     const output_field = document.getElementById(id);
-    output_field.innerText = code;
+    output_field.value = code;
 }
 
 
