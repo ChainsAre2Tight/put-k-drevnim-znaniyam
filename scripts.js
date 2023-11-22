@@ -62,6 +62,9 @@ function transform_code(code, transforms, reverse) {
     console.log(transforms)
 
     for (const line of code.split('\n')) {
+        if (line.includes("#include") || line === '') {
+            continue
+        }
         let new_line = line;
         for (const rep of transforms) {
             if (reverse === false) {
